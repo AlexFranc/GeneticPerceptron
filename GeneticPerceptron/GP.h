@@ -6,20 +6,13 @@ using namespace std;
 
 namespace GP
 {
-<<<<<<< HEAD
 	// Предварительное объявление прототипов, для подсказок компилятору.
-=======
->>>>>>> origin/master
 	class PData;
 	class PNeuron;
 	class PWeb;
 
-<<<<<<< HEAD
-	// Прототипы.
 
 	// Параметр для потока тестирования.
-=======
->>>>>>> origin/master
 	struct ThreadParam
 	{
 		size_t numCPU;
@@ -32,11 +25,9 @@ namespace GP
 		atomic<bool> *threadEnd;
 	};
 	
-<<<<<<< HEAD
+	
 	// PData потоко-небезопасен. Пока объект PWeb обучается, используя объект PData, запрещается как-либо изменять содержимое используемого 
 	// объекта PData.
-=======
->>>>>>> origin/master
 	class PData
 	{
 	public:
