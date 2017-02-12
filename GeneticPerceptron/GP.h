@@ -11,10 +11,7 @@ namespace GP
 	class PNeuron;
 	class PWeb;
 
-	// Прототипы.
-
 	// Параметр для потока тестирования.
-
 	struct ThreadParam
 	{
 		size_t numCPU;
@@ -29,7 +26,6 @@ namespace GP
 	
 	// PData потоко-небезопасен. Пока объект PWeb обучается, используя объект PData, запрещается как-либо изменять содержимое используемого 
 	// объекта PData.
-
 	class PData
 	{
 	public:
