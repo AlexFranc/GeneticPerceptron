@@ -32,10 +32,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	perceptron.saveToBinFile("perceptron1.pweb");
 	// Загружаем сеть из файла.
 	perceptron.loadFromBinFile("perceptron1.pweb");
-	
+
 	// Протестируем обученную сеть на другой выборке из той же области.
 	double *helpBuffer = new double[COUNT_INS + COUNT_OUTS];
-	lessons.loadFromTxtFile(COUNT_INS, COUNT_OUTS, "Weapons tests.txt");
+	//lessons.loadFromTxtFile(COUNT_INS, COUNT_OUTS, "Weapons tests.txt");
+	lessons.loadFromTxtFile(COUNT_INS, COUNT_OUTS, "Weapons lessons.txt");
 	for (size_t e = 0; e < lessons.getCountLessons(); ++e)
 	{
 		for (size_t h = 0; h < COUNT_INS + COUNT_OUTS; ++h)

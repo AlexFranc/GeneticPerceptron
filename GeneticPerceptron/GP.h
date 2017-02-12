@@ -6,20 +6,15 @@ using namespace std;
 
 namespace GP
 {
-<<<<<<< HEAD
 	// Предварительное объявление прототипов, для подсказок компилятору.
-=======
->>>>>>> origin/master
 	class PData;
 	class PNeuron;
 	class PWeb;
 
-<<<<<<< HEAD
 	// Прототипы.
 
 	// Параметр для потока тестирования.
-=======
->>>>>>> origin/master
+
 	struct ThreadParam
 	{
 		size_t numCPU;
@@ -32,11 +27,9 @@ namespace GP
 		atomic<bool> *threadEnd;
 	};
 	
-<<<<<<< HEAD
 	// PData потоко-небезопасен. Пока объект PWeb обучается, используя объект PData, запрещается как-либо изменять содержимое используемого 
 	// объекта PData.
-=======
->>>>>>> origin/master
+
 	class PData
 	{
 	public:
@@ -59,24 +52,6 @@ namespace GP
 		size_t countOuts;
 		size_t countLessons;
 		double *data;
-	};
-	class PNeuron
-	{
-	public:
-		PNeuron() = delete;
-		PNeuron(const size_t _countWeights);
-		PNeuron(const PNeuron &_object) _NOEXCEPT;
-		PNeuron(PNeuron &&_object) _NOEXCEPT;
-		PNeuron &operator=(const PNeuron &_object) _NOEXCEPT;
-		PNeuron &operator=(PNeuron &&_object) _NOEXCEPT;
-		~PNeuron() _NOEXCEPT;
-		void genOut(const double *_ins, double &_out, double(*_f)(double) = nullptr) _NOEXCEPT;
-		double &operator[](size_t _w) _NOEXCEPT;
-		const size_t &getCountWeights() const  _NOEXCEPT;
-	protected:
-	private:
-		size_t countWeights;
-		double *weights;
 	};
 	class PWeb
 	{
@@ -104,9 +79,10 @@ namespace GP
 		size_t countLayers;
 		size_t *topology;
 		size_t countHelpValues;
+		size_t countWeights;
 		double *helpIns;
 		double *helpOuts;
-		PNeuron ***neurons;
+		double *weights;
 		double sumSigma;
 		double (*f)(double);
 		const PData *data;
@@ -115,9 +91,6 @@ namespace GP
 	};
 
 	extern default_random_engine globalRandomEngine;
-	extern uniform_real_distribution<double> globalWDistribution;
-	extern uniform_int_distribution<size_t> globalProbobilityCrossDistribution;
-	extern uniform_int_distribution<size_t> globalProbobilityMutationDistribution;
-	extern uniform_int_distribution<size_t> globalProbobilitySupermutationDistribution;
+	extern uniform_real_distribution<double> globalValueDistribution;
 };
 #endif
