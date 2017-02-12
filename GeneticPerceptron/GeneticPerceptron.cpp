@@ -35,7 +35,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// Протестируем обученную сеть на другой выборке из той же области.
 	double *helpBuffer = new double[COUNT_INS + COUNT_OUTS];
-	//lessons.loadFromTxtFile(COUNT_INS, COUNT_OUTS, "Weapons tests.txt");
+	//lessons.loadFromTxtFile(COUNT_INS, COUNT_OUTS, "Weapons lessons.txt");
 	lessons.loadFromTxtFile(COUNT_INS, COUNT_OUTS, "Weapons tests.txt");
 	for (size_t e = 0; e < lessons.getCountLessons(); ++e)
 	{

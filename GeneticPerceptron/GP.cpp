@@ -754,7 +754,7 @@ unsigned int _stdcall PWeb::crossAndTestThread(void *_param) _NOEXCEPT
 	const size_t numCPU = ((ThreadParam*)_param)->numCPU;
 	const size_t ID = ((ThreadParam*)_param)->ID;
 	PWeb **buffer = ((ThreadParam*)_param)->buffer;
-	uniform_int_distribution<size_t> threadCountWeightsDistribution(1, buffer[0]->countWeights - 1 );
+	uniform_int_distribution<size_t> threadCountWeightsDistribution(0, buffer[0]->countWeights - 1);
 	const size_t countParents = ((ThreadParam*)_param)->countParents;
 	const double mForce = ((ThreadParam*)_param)->mForce;
 	const HANDLE hStartSemaphore = ((ThreadParam*)_param)->hStartSemaphore;
@@ -801,15 +801,22 @@ unsigned int _stdcall PWeb::crossAndTestThread(void *_param) _NOEXCEPT
 					{
 						if (p1 != p2)
 						{
-							// Тест одноточечного кроссинговера и перекрывающихся мутаций.
 							// Скрещиваем.
 							crossPoint = threadCountWeightsDistribution(threadRandomEngine);
-							memcpy(buffer[startOurChilds + localBias]->weights, 
-								buffer[p1]->weights, 
-								sizeof(double)* crossPoint);
-							memcpy(&buffer[startOurChilds + localBias]->weights[crossPoint], 
-								&buffer[p2]->weights[crossPoint], 
-								sizeof(double)* (countWeights - crossPoint));
+							if ((crossPoint == 0) || (crossPoint == (countWeights - 1)))
+							{
+								memcpy(buffer[startOurChilds + localBias]->weights,
+									buffer[p1]->weights,
+									sizeof(double)* countWeights);
+							}
+							else {
+								memcpy(buffer[startOurChilds + localBias]->weights,
+									buffer[p1]->weights,
+									sizeof(double)* crossPoint);
+								memcpy(&buffer[startOurChilds + localBias]->weights[crossPoint],
+									&buffer[p2]->weights[crossPoint],
+									sizeof(double)* (countWeights - crossPoint));
+							}
 							// Добавляем потомку мутаций.
 							countMutations = 0;
 							while (countMutations++ < maxCountMutationsPerWeb)
